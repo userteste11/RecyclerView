@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityAdicionar">
+
+    <EditText
+        android:id="@+id/TextNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/TextQtd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:ems="10"
+        android:hint="Quantidade"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/TextNome"
+        app:layout_constraintStart_toStartOf="@+id/TextNome"
+        app:layout_constraintTop_toBottomOf="@+id/TextNome" />
+
+    <Button
+        android:id="@+id/buttonSalvar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:onClick="enviarDados"
+        android:text="Adicionar"
+        app:layout_constraintTop_toBottomOf="@+id/TextQtd"
+        tools:layout_editor_absoluteX="61dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="TextQtd,TextNome" />
+</androidx.constraintlayout.widget.ConstraintLayout>
