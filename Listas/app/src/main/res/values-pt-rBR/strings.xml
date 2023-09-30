@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Listas De Mercado</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="limparMarcado">Limpar</string>
+    <string name="textProduto">Produto</string>
+    <string name="textQuantidade">Quantidade</string>
+    <string name="Marcado">Comprado</string>
+</resources>

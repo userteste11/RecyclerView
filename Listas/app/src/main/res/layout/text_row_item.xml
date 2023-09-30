@@ -13,26 +13,43 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/nomeTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="nome"
+            android:text="@string/textProduto"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/nomeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textProduto"
+            android:textAlignment="center"
             android:textSize="24dp"
             android:textStyle="bold"></TextView>
 
         <TextView
-            android:id="@+id/cursoTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="curso"
-            android:textSize="24dp"></TextView>
+            android:text="@string/textQuantidade"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/cursoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textQuantidade"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"></TextView>
 
         <CheckBox
             android:id="@+id/marcadocheckbox"
-            android:layout_width="92dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="Comprar" />
+            android:text="@string/Marcado" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -15,9 +15,6 @@
             android:name=".ActivityAdicionar"
             android:exported="false" />
         <activity
-            android:name=".DetalhesAlunoActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

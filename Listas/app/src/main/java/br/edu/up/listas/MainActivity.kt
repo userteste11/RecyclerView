@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     private var SEU_REQUEST_CODE = 1
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-    private var contadorProdutos = 0
     private var dataset = mutableListOf<Produto>()
 
 
@@ -36,11 +35,11 @@ class MainActivity : AppCompatActivity() {
         val recicle: RecyclerView = findViewById(R.id.reciclerView)
         sharedPreferences = getSharedPreferences("MinhasPreferencias", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
+        //pego o ultimo id
         var contadorProdutos = sharedPreferences.getInt("contador_produtos", 0)
         Log.d("MainActivity", "produtos cadastrados: $contadorProdutos")
 
-        //editor.clear(); // Apaga todos os dados armazenados nas preferências compartilhadas
-        //editor.apply();
+;       //preencho a list dataset com os produtos
         for (i in 1..contadorProdutos) {
             val idProduto = sharedPreferences.getString("produto_${i}_id", "")?:""
             val nomeProduto = sharedPreferences.getString("produto_${i}_nome", "")?:""
@@ -71,13 +70,13 @@ class MainActivity : AppCompatActivity() {
 
                 // Recuperar as informações do produto que está sendo movido/deslizado
                 val produtoRemovido = dataset[position]
-                val produtoId = produtoRemovido.id.toString()
+                val produtoId = produtoRemovido.id
 
                 // Remover o produto do dataset
                 dataset.removeAt(position)
                 customAdapter.notifyItemRemoved(position)
 
-                // Remova as informações do produto que está sendo movido/deslizado
+                // Remova as informações do produto que está sendo movido/deslizado no sharedPreferences
                 if (produtoId != null) {
                     editor.remove("produto_${produtoId}_id")
                     editor.remove("produto_${produtoId}_nome")
@@ -89,6 +88,7 @@ class MainActivity : AppCompatActivity() {
 
                 editor.putInt("contador_produtos", contadorProdutos)
                 editor.apply()
+
             }
         }
         )
@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity() {
             val nomeTextView: TextView
             val qtdTextView: TextView
             val marcadocheckboxView: CheckBox
-
 
             init {
                 nomeTextView = view.findViewById(R.id.nomeTextView)
@@ -131,25 +130,17 @@ class MainActivity : AppCompatActivity() {
                 val sharedPreferences = context.getSharedPreferences("MinhasPreferencias", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
                 editor.putBoolean("produto_${produto.id}_marcado", isChecked) // Use o ID do produto para identificar a entrada no SharedPreferences
-
                 editor.apply()
             }
-
-            holder.itemView.setOnClickListener {
-                val intent = Intent(it.context, DetalhesAlunoActivity::class.java )
-                intent.putExtra("nome", produto.nome)
-                intent.putExtra("quantidade", produto.qtd)
-                it.context.startActivity(intent)
-            }
         }
-        override fun getItemCount(): Int {
+        override fun getItemCount(): Int {//trazer o tamanho da list
             return dataSet.size
         }
 
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        //if para recuperar os dados e criar
         if (requestCode == SEU_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // Verifica se a ActivityAdicionar retornou nome e quantidade
             val nome = data?.getStringExtra("nome_produto")
@@ -157,6 +148,7 @@ class MainActivity : AppCompatActivity() {
 
             if (nome != null && nome.isNotEmpty() && quantidadep != null) {
                 var contadorProdutos = sharedPreferences.getInt("contador_produtos", 0)
+                //cadastro
                 contadorProdutos++
                 editor.putInt("contador_produtos", contadorProdutos)
                 editor.putString("produto_${contadorProdutos}_id", contadorProdutos.toString())
@@ -164,35 +156,36 @@ class MainActivity : AppCompatActivity() {
                 editor.putInt("produto_${contadorProdutos}_quantidade", quantidadep)
                 editor.putBoolean("produto_${contadorProdutos}_marcado", false)
                 editor.apply()
-
+                //cadastro na list
                 val novoProduto = Produto(contadorProdutos.toString() ,nome, quantidadep, false)
                 dataset.add(novoProduto)
                 customAdapter.notifyItemInserted(dataset.size - 1)
+                val duracaoCurta = Toast.LENGTH_LONG
+                Toast.makeText(this, "Cadastrado", duracaoCurta).show()
+
                 Log.d("MainActivity", "Novo Produto Criado - Nome: $nome, Quantidade: $quantidadep, id: $contadorProdutos")
-                Log.d("MainActivity", "produtos cadastrados: $contadorProdutos")
             }else{
-                Log.d("MainActivity", "Dados da ActivityAdicionar não recebidos corretamente")
                 val duracaoCurta = Toast.LENGTH_LONG
                 Toast.makeText(this, "Dados Incompletos", duracaoCurta).show()
+
+                Log.d("MainActivity", "Dados da Activity não recebidos corretamente")
             }
-
-
         }
     }
 
     fun PaginaAdicionarProduto(view: View) {
         val intent = Intent(this, ActivityAdicionar::class.java)
-        startActivityForResult(intent, SEU_REQUEST_CODE)
+        startActivityForResult(intent, SEU_REQUEST_CODE)//chama uma nova activity e espera um resultado
 
     }
 
     fun LimparProduto(view: View)
     {
         val iterator = dataset.iterator()
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()) {//percorro a list
             val produto = iterator.next()
             if (produto.marcado) {
-                iterator.remove() // Remove produtos marcados da lista
+                iterator.remove() // Remove produtos marcados da lista e depois do sharedPreference
                 editor.remove("produto_${produto.id}_id")
                 editor.remove("produto_${produto.id}_nome")
                 editor.remove("produto_${produto.id}_quantidade")
@@ -201,11 +194,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         customAdapter.notifyDataSetChanged()
+        val duracaoCurta = Toast.LENGTH_LONG
+        Toast.makeText(this, "Removido com Sucesso", duracaoCurta).show()
     }
-
-
 }
-
-
-
-
