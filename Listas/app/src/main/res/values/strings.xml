@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Market Lists</string>
-    <string name="adicionar" >Add</string>
-    <string name="limparMarcado" >Clean</string>
-    <string name="textProduto" >product</string>
-    <string name="textQuantidade" >quantity</string>
-    <string name="Marcado" >bought</string>
+    <string name="adicionar">Add</string>
+    <string name="limparMarcado">Clean</string>
+    <string name="textProduto">product</string>
+    <string name="textQuantidade">quantity</string>
+    <string name="Marcado">bought</string>
 </resources>

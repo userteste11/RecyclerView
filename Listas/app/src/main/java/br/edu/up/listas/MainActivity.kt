@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editor: SharedPreferences.Editor
     private var dataset = mutableListOf<Produto>()
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val intent = Intent(this, activity_Temporaria::class.java)
+        startActivity(intent)
 
 
         val recicle: RecyclerView = findViewById(R.id.reciclerView)
@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                 dataset.add(novoProduto)
                 customAdapter.notifyItemInserted(dataset.size - 1)
                 val duracaoCurta = Toast.LENGTH_LONG
-                Toast.makeText(this, "Cadastrado", duracaoCurta).show()
+                Toast.makeText(this, "Adicionado", duracaoCurta).show()
 
                 Log.d("MainActivity", "Novo Produto Criado - Nome: $nome, Quantidade: $quantidadep, id: $contadorProdutos")
             }else{
