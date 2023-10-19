@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 customAdapter.notifyItemInserted(dataset.size - 1)
                 val duracaoCurta = Toast.LENGTH_LONG
                 Toast.makeText(this, "Adicionado", duracaoCurta).show()
-                Log.d("MainActivity", "Novo Produto Criado - Nome: $nome")
+                Log.d("MainActivityy", "Novo Produto Criado - Nome: $nome")
             } else {
                 val duracaoCurta = Toast.LENGTH_LONG
                 Toast.makeText(this, "Dados Incompletos", duracaoCurta).show()
