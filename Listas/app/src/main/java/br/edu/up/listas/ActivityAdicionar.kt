@@ -16,17 +16,16 @@ class ActivityAdicionar : AppCompatActivity() {
         setContentView(R.layout.activity_adicionar)
         //set O EditText nas variavel
         textoNome= findViewById(R.id.TextNome)
-        textoQuantidade= findViewById(R.id.TextQtd)
+
     }
 
     fun enviarDados(view: View) {
 
         val novoProduto = textoNome.text.toString()
-        val quantidadeProduto = textoQuantidade.text.toString().toIntOrNull() ?: 0
+
         val intent = Intent()
         //retorno a variavel
         intent.putExtra("nome_produto", novoProduto)
-        intent.putExtra("qtd_produto", quantidadeProduto)
 
         setResult(Activity.RESULT_OK, intent)
         finish()
